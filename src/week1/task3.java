@@ -2,7 +2,11 @@ package week1;
 
 public class task3 {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println(" (And all the people of the world)");
+        int daysInYear = 365;
+        int hoursInDay = 24;
+        int minutesInHour = 60;
+        int secondsInMinute = 60;
+        int finalResult = daysInYear * hoursInDay * minutesInHour * secondsInMinute;
+        System.out.println(finalResult);
     }
 }
