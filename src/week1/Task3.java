@@ -1,6 +1,6 @@
 package week1;
 
-public class task3 {
+public class Task3 {
     public static void main(String[] args) {
         int daysInYear = 365;
         int hoursInDay = 24;
