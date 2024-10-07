@@ -11,15 +11,12 @@ public class Task3 {
         Scanner input = new Scanner(System.in);
         int number;
         int sum = 0;
-        while (true) {
+        do {
             System.out.println("Enter a number: ");
             number = Integer.parseInt(input.nextLine());
             sum += number;
             System.out.println("Sum is: " + sum);
-            if (number == 0) {
-                break;
-            }
-        }
+        } while (number != 0);
         input.close();
 
     }
