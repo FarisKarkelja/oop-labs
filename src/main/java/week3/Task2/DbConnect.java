@@ -46,8 +46,9 @@ public class DbConnect {
         DbConnect database = new DbConnect();
         database.getAllTasks();
         database.getById(2);
-        database.createNewTask(6, "Another task creation", Status.TO_DO);
+        database.createNewTask(7, "Test.", Status.TO_DO);
         database.updateTaskName(2, "New description.");
+        database.closeConnection();
     }
 
     public void getAllTasks() throws SQLException {
