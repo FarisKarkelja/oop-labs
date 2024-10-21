@@ -46,6 +46,6 @@ public class Person {
     }
 
     public String toString() {
-        return this.name + "\n" + "  " + this.address + "\n" + " " + this.age + "\n" + " " + this.country;
+        return "Name: " + this.name + "\n" + "Address: " + this.address + "\n" + "Age: " + this.age + "\n" + "Country: " + this.country;
     }
 }

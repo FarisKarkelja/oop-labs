@@ -18,6 +18,6 @@ public class Teacher extends Person {
 
     @Override
     public String toString() {
-        return super.getName() + "\n" + "  " + super.getAddress() + "\n" + "  salary " + this.salary + " euros/month";
+        return super.toString() + "\n" + "  salary " + this.salary + " euros/month";
     }
 }
