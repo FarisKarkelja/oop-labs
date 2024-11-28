@@ -205,28 +205,22 @@ class Person {
 class Main {
     public static void main(String[] args) {
         Milk milk = new Milk("489ABC", "Meggle", 2.95, 8.0);
-        Honey honey = new Honey("MMC900", "Podravka", 12.95,
-                HoneyType.BAGREMOV);
+        Honey honey = new Honey("MMC900", "Podravka", 12.95, HoneyType.BAGREMOV);
         Date currentDate = new Date();
         Order<Milk> milkOrder = new Order<>("28D4", currentDate);
         Order<Honey> honeyOrder = new Order<>("MK4C", currentDate);
         milkOrder.addItem(milk, 2);
         honeyOrder.addItem(honey, 4);
-        System.out.println("Milk Order Total: " +
-                milkOrder.calculateTotalAmount());
-        System.out.println("Honey Order Total: " +
-                honeyOrder.calculateTotalAmount());
-        System.out.println("Milk Discount: " +
-                milk.calculateDiscount(0.1));
-        System.out.println("Honey Discount: " +
-                honey.calculateDiscount(0.2));
+        System.out.println("Milk Order Total: " + milkOrder.calculateTotalAmount());
+        System.out.println("Honey Order Total: " + honeyOrder.calculateTotalAmount());
+        System.out.println("Milk Discount: " + milk.calculateDiscount(0.1));
+        System.out.println("Honey Discount: " + honey.calculateDiscount(0.2));
         Person person = new Person("John Doe", 48);
         person.addOrder(milkOrder);
         person.addOrder(honeyOrder);
         for (Order<? extends Item> order : person.getOrders()) {
             System.out.println(order);
-            System.out.println("Total: " +
-                    order.calculateTotalAmount());
+            System.out.println("Total: " + order.calculateTotalAmount());
         }
     }
 }

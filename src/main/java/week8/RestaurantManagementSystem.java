@@ -305,25 +305,20 @@ class Restaurant {
 
 class MainCode {
     public static void main(String[] args) {
-        Dish pizza = new Dish("D01", "Pizza Margherita", 12.99,
-                CuisineType.ITALIAN, "Tomato, Mozzarella");
+        Dish pizza = new Dish("D01", "Pizza Margherita", 12.99, CuisineType.ITALIAN, "Tomato, Mozzarella");
         Drink cola = new Drink("B01", "Cola", 2.50, 500);
         Restaurant restaurant = new Restaurant("Gourmet Bistro");
         restaurant.addMenuItem(pizza);
         restaurant.addMenuItem(cola);
-        Customer customer = new Customer("C01", "John Doe",
-                "123456789");
-        TableReservation<Dish> dishReservation = new
-                TableReservation<>("R01", new Date(), 5);
+        Customer customer = new Customer("C01", "John Doe", "123456789");
+        TableReservation<Dish> dishReservation = new TableReservation<>("R01", new Date(), 5);
         dishReservation.addItemToOrder(pizza, 2);
-        TableReservation<Drink> drinkReservation = new
-                TableReservation<>("R02", new Date(), 5);
+        TableReservation<Drink> drinkReservation = new TableReservation<>("R02", new Date(), 5);
         drinkReservation.addItemToOrder(cola, 3);
         customer.addReservation(dishReservation);
         customer.addReservation(drinkReservation);
         restaurant.addCustomer(customer);
         restaurant.displayMenu();
-        System.out.println("Total Revenue: $" +
-                restaurant.calculateTotalSales());
+        System.out.println("Total Revenue: $" + restaurant.calculateTotalSales());
     }
 }
