@@ -97,7 +97,7 @@ class GenreFilterIterator implements Iterator<Song> {
     }
 }
 
-class MainCall {
+class MainMethod {
     public static void main(String[] args){
         Song song1 = new Song("Song A", "Artist 1", "Pop");
         Song song2 = new Song("Song B", "Artist 2", "Rock");
