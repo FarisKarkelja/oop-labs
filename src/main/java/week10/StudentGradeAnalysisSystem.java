@@ -1,23 +1,18 @@
 package week10;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.util.*;
-
-public class StudentGradeAnalysisSystem {
-
-}
+import java.lang.*;
 
 class Student {
     private String name;
     private int ID;
     private List<Integer> grades;
 
-    public Student(String name, int ID) {
+    public Student(String name, int ID, Integer[] grades) {
         this.name = name;
         this.ID = ID;
-        this.grades = new ArrayList<>();
+        this.grades = Arrays.asList(grades);
     }
 
     public String getName() {
@@ -43,93 +38,72 @@ class Student {
     public void setGrades(List<Integer> grades) {
         this.grades = grades;
     }
-
-    public String printInfo() {
-        return "Name: " + name + ", ID: " + ID + ", Grades: " + grades;
-    }
 }
 
 class GradeAnalyzer {
-    private List<Integer> grades;
+    List<Integer> grades;
 
-    public GradeAnalyzer() {
-        this.grades = new ArrayList<>();
-    }
-
-    public List<Integer> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(List<Integer> grades) {
-        this.grades = grades;
+    public GradeAnalyzer(Integer[] grades) {
+        this.grades = Arrays.asList(grades);
     }
 
     public double calculateAverage() {
-        double sum = 0.0;
-        double average;
-        for (int grade : grades) {
+        double sum = 0;
+        for (Integer grade : grades) {
             sum += grade;
         }
-        average = sum / grades.size();
-        return average;
+        return sum / grades.size();
     }
 
-    public String printSummary() {
-        return "Grades: " + grades + "\nAverage: " + calculateAverage();
+    public void printSummary() {
+        System.out.println("Average grade is " + calculateAverage());
     }
 }
 
-class Start {
+class MainCall {
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
-        List<Integer> grades = new ArrayList<>();
-        Collections.addAll(grades, 4, 5, 5, 1, 1, 2, 3, 5, 5, 5);
-
-        Student student = new Student("John", 23);
-        student.setGrades(grades);
-
-        GradeAnalyzer gradeAnalyzer = new GradeAnalyzer();
-        gradeAnalyzer.setGrades(grades);
+        Student student = new Student("Safet", 32, new Integer[]{4, 3, 2, 5, 5, 5, 5});
+        GradeAnalyzer analyzer = new GradeAnalyzer(new Integer[]{4, 3, 2, 5, 5, 5, 5});
 
         Field[] studentFields = student.getClass().getDeclaredFields();
-        Field[] analyzerFields = gradeAnalyzer.getClass().getDeclaredFields();
-
-        for (Field f : studentFields) {
-            f.setAccessible(true);
-            System.out.println(f.getName());
-            System.out.println(f.get(student));
+        for (Field field : studentFields) {
+            field.setAccessible(true);
+            System.out.println(field.getName() + " : " + field.get(student));
         }
 
-        for (Field f : analyzerFields) {
-            f.setAccessible(true);
-            System.out.println(f.getName());
-            System.out.println(f.get(gradeAnalyzer));
+        Field[] analyzerFields = analyzer.getClass().getDeclaredFields();
+        for (Field field : analyzerFields) {
+            field.setAccessible(true);
+            System.out.println(field.getName() + " : " + field.get(analyzer));
         }
 
         Method[] studentMethods = student.getClass().getDeclaredMethods();
-        Method[] analyzerMethods = gradeAnalyzer.getClass().getDeclaredMethods();
-
-        for(Method m : studentMethods) {
-            if(m.getName().startsWith("calculate") || m.getName().startsWith("print")){
-                m.setAccessible(true);
-                if(m.getReturnType() != void.class){
-                    m.invoke(student);
-                    System.out.println(m.invoke(student));
+        for (Method method : studentMethods) {
+            if (method.getName().startsWith("calculate") || method.getName().startsWith("print")) {
+                method.setAccessible(true);
+                if (method.getReturnType().equals(void.class)) {
+                    System.out.println("Void method was invoked.");
+                    method.invoke(student);
                 } else {
-                    System.out.println("Void type method invoked.");
+                    System.out.println("Non-void method was invoked.");
+                    method.invoke(student);
                 }
             }
         }
 
-        for(Method m : analyzerMethods) {
-            if(m.getName().startsWith("calculate") || m.getName().startsWith("print")){
-                m.setAccessible(true);
-                if(m.getReturnType() != void.class){
-                    System.out.println(m.invoke(gradeAnalyzer));
+        Method[] analyzerMethods = analyzer.getClass().getDeclaredMethods();
+        for (Method method : analyzerMethods) {
+            if (method.getName().startsWith("calculate") || method.getName().startsWith("print")) {
+                method.setAccessible(true);
+                if (method.getReturnType().equals(void.class)) {
+                    System.out.println("Void method was invoked.");
+                    method.invoke(analyzer);
                 } else {
-                    m.invoke(gradeAnalyzer);
-                    System.out.println("Void type method invoked.");
+                    System.out.println("Non-void method was invoked.");
+                    method.invoke(analyzer);
                 }
             }
         }
     }
 }
+

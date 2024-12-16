@@ -1,5 +1,2 @@
-2004-09-28 22:49:05 | Event Type: <Logout> | User ID: <488>
-2015-12-11 01:30:50 | Event Type: <ViewPage> | User ID: <842>
-2013-09-17 05:09:19 | Event Type: <Logout> | User ID: <418>
-2003-11-19 06:55:48 | Event Type: <Logout> | User ID: <40>
-2008-04-01 01:44:45 | Event Type: <Logout> | User ID: <360>
+2013-02-05 03:44:03 | Event Type: <ViewPage> | User ID: <274>
+2019-05-11 11:55:11 | Event Type: <ViewPage> | User ID: <149>

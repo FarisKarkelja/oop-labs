@@ -11,24 +11,23 @@ public class MessagingSystem {
     @Target({ElementType.TYPE, ElementType.METHOD})
     @Retention(RetentionPolicy.RUNTIME)
     public @interface RequiresPermission {
+        String level() default "admin";
     }
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
     public @interface UserPermission {
+        String level() default "user";
     }
 
     @CanSendMessage
+    @RequiresPermission
     public static void sendMessage(User user) {
-        Class<?> userClass = user.getClass();
-        if (userClass.isAnnotationPresent(UserPermission.class)) {
-            if (user instanceof AdminUser) {
-                System.out.println("Admin user " + user.getUsername() + " sent a message.");
-            } else if (user instanceof RegularUser) {
-                System.out.println("Regular user " + user.getUsername() + " is restricted from sending messages.");
-            }
+        UserPermission permission = user.getClass().getAnnotation(UserPermission.class);
+        if (permission.level().equals("admin")) {
+            System.out.println("User " + user.getUsername() + " sent a message.");
         } else {
-            System.out.println("Unknown user type: No permission to send messages.");
+            System.out.println("User " + user.getUsername() + " can't send messages.");
         }
     }
 }
@@ -56,7 +55,7 @@ class RegularUser extends User {
     }
 }
 
-@MessagingSystem.UserPermission
+@MessagingSystem.UserPermission(level = "admin")
 class AdminUser extends User {
     public AdminUser(String username) {
         super(username);
